@@ -1,0 +1,684 @@
+<head>
+<title>Skripits</title>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  	<script src="//cdn.ckeditor.com/4.5.5/basic/ckeditor.js"></script>
+</head>
+
+<body class="bground">
+<!--<div id="fb-root"></div>-->
+{{#if currentUser}}
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+      	</button>
+      	<a class="navbar-brand logo" href="/">Skripits</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+	<ul class="nav navbar-nav fontModify">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Write<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href= '/addAPoem'>Write a Poem</a></li>			
+			<li><a href= '/addAToem'>Write a Short Story</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+			<li><a href= '/poemsTemp'>Poems</a></li>
+			<li><a href= '/toemsTemp'>Short Stories</a></li>
+			<li><a href= '/myPoemsTemp'>My Poems</a></li>
+			<li><a href= '/myToemsTemp'>My Short Stories</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Forums<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+			<li><a href= '/forumPoem'>Forum for Poems</a></li>
+			<li><a href= '/forumToem' margin-top="20px">Forum for Short Stories</a></li>
+          </ul>
+        </li>
+      </ul>	
+      <ul class="nav navbar-nav navbar-right">
+      	<li class="fbPicNavbar"><a href= '/profilePage'>{{>fb_pic pic}}</a></li>
+        <li class="login">{{>loginButtons}}</li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+{{/if}}
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</body>
+
+<template name='fb_pic'>
+  {{#if currentUser}}
+    <img class="fbPic" src="{{pic}}">
+  {{/if}}
+</template>
+
+<template name='fb_largePic'>
+  {{#if currentUser}}
+    <img id="profilePic" src="{{largePic}}">
+  {{/if}}
+</template>
+
+<template name='fb_name'>
+	{{#if currentUser}}
+		<span id="profileName">{{currentUser.profile.name}}</span>
+	{{/if}}
+</template>
+
+<template name="layout">
+<div class="container">
+	<div class="row top-buffer">
+		<div class="col-sm-7 col-sm-offset-1 mainBody">
+			{{>yield}}
+		</div>
+		<div class="col-sm-2">
+			{{#if currentUser}}
+		<ul style="list-style-type:none" class="index">
+			<li><a href= '/profilePage'>{{>fb_largePic}}</a></li>
+			<li><a href= '/profilePage'>{{>fb_name}}</a></li>
+			<div class="navigationBucket">
+			<li><a id="apId" href= '/addAPoem'>Write a Poem</a></li>			
+			<li><div class="mBorder"><a id="asId" href= '/addAToem'>Write a Short Story</a></div></li>
+			<li><a id="pId" href= '/poemsTemp'>Poems</a></li>
+			<li><a id="sId" href= '/toemsTemp'>Short Stories</a></li>
+			<li><a id="mpId" href= '/myPoemsTemp'>My Poems</a></li>
+			<li><div class="mBorder"><a id="msId" href= '/myToemsTemp'>My Short Stories</a></div></li>
+			<li><a id="fpId" href= '/forumPoem'>Forum for Poems</a></li>
+			<li><a id="fsId" href= '/forumToem' margin-top="20px">Forum for Short Stories</a></li>
+			</div>
+		</ul>
+			{{/if}}
+		</div>
+		<div class="col-sm-2">
+			{{#if currentUser}}
+				{{>feedbackPosts}}
+			{{/if}}
+		</div>
+	</div>
+</div>
+</template>
+
+<template name="loading">
+	{{>spinner}}
+</template>
+
+<template name="notFound">
+    notFound
+</template>
+
+<template name="feedbackPosts">
+	<div class="well well-sm" id="feedbackBox">
+		Tell us what you think about the website
+	</div>
+	<ul style="list-style-type:none" id="feedback">
+		{{#each feedbackItem}}
+			<li class="lightFeedbackContent" style="margin-top:5px">{{author}}:{{feedback}}{{#if ownFeedback}}<button type="button" class="btn btn-xs feedbackDelete"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>{{/if}}</li>
+			<li class="lightFeedback">{{createdAt}}</li>
+		{{/each}}
+			<li>{{>feedbackSubmit}}</li>
+	</ul>
+</template>
+
+<template name="feedbackSubmit">
+	<form>
+		<li><textarea class="form-control feedbackContainer" rows="2" cols="12" name="feedback" placeholder="Feedback"></textarea></li>
+		<li><button type="submit" class="btn btn-default feedbackButton">Submit</button></li>
+	</form>
+</template>
+
+<template name="poemsTemp">
+<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+		{{>poemsItem}}
+	{{/each}}
+</ul>
+    {{#if nextPath}}
+      <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+      {{#unless ready}}
+        {{> spinner}}
+      {{/unless}}
+    {{/if}}
+</template>
+
+<template name="poemsItem">
+		<p class="bucket">
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		{{#if notAnonymous}}
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		{{else}}
+		<li><img class="authorPic" src="Anonymous_logo.png"><span class="authorName">{{author}}</span></li>
+		{{/if}}
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}		
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+			{{>commentsTemp}}
+		<!--<a href="#">Click to read more</a>-->
+		</p>
+</template>
+
+
+<template name="toemsTemp">
+<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+		{{>toemsItem}}
+	{{/each}}
+</ul>
+	{{#if nextPath}}
+      <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+      {{#unless ready}}
+        {{> spinner}}
+      {{/unless}}
+    {{/if}}
+</template>
+
+<template name="toemsItem">
+		<p class="bucket">
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		{{#if notAnonymous}}
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		{{else}}
+		<li><img class="authorPic" src="Anonymous_logo.png"><span class="authorName">{{author}}</span></li>
+		{{/if}}
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+		{{>commentsTemp}}
+		</p>
+</template>
+
+<template name ="myPoemsTemp">
+{{#if numberPoemGrt}}
+<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+	<p class="bucket">
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}	
+	{{#if editing}}
+		{{>contentEdit}}
+	{{/if}}
+		{{>commentsTemp}}
+	</p>
+	{{/each}}
+</ul>
+	{{#if nextPath}}
+      <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+      {{#unless ready}}
+        {{> spinner}}
+      {{/unless}}
+    {{/if}}
+{{else}}
+<ul style="list-style-type:none" class="empty">
+<li class="emptyDisplay"><em>There are no poems to display</em></li>
+</ul>
+{{/if}}
+</template>
+
+<template name="myToemsTemp">
+{{#if numberToemGrt}}
+<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+		<p class="bucket">	
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>	
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+		{{>commentsTemp}}
+		</p>
+	{{/each}}
+</ul>
+	{{#if nextPath}}
+      <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+      {{#unless ready}}
+        {{> spinner}}
+      {{/unless}}
+    {{/if}}
+{{else}}
+
+<ul style="list-style-type:none" class="empty">
+<li class="emptyDisplay"><em>There are no short stories to display</em></li>
+</ul>
+
+{{/if}}
+</template>
+
+<template name ="homeTemp">
+{{#if currentUser}}
+	<ul style="list-style-type:none" class="pcl">
+		{{#each Contents}}
+		{{>homeItem}}
+		{{/each}}
+	</ul>
+		{{#if nextPath}}
+	     <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+	      {{#unless ready}}
+	        {{> spinner}}
+	      {{/unless}}
+    {{/if}}
+{{/if}}
+	{{#unless currentUser}}
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4 col-sm-push-3 beforeLogin">
+    			{{>loginButtons}}
+    		<p>	
+    		<ul style="list-style-type:none">
+    			<em>    		
+    			<p><li>you want to show your poems to the world</li>
+    			<li>you can write them here</li></p>
+    			
+    			<p><li>you want to show your short stories to the world</li>
+    			<li>you can write them here</li></p></em>
+    		</ul></p>
+    	</div>
+    	</div>
+    </div>
+    {{/unless}}
+</template>
+
+<template name="homeItem">
+		<p class="bucket">
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		{{#if notAnonymous}}
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		{{else}}
+		<li><img class="authorPic" src="Anonymous_logo.png"><span class="authorName">{{author}}</span></li>
+		{{/if}}
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+			{{>commentsTemp}}
+		</p>
+</template>
+
+<template name="homeItemIndividual">
+		<ul style="list-style-type:none" class="pcl">
+			{{>homeItem}}
+		</ul>
+</template>
+
+<template name="contentEdit">
+		<ul style="list-style-type:none">
+			<li><textarea name="theme" class="form-control titleEditSpace" value={{title}}></textarea></li>
+			<li><textarea name="content" class="contentEditSpace" value={{content}}></textarea>></li>
+			<!--<li><textarea name="tag" class="form-control tagEditSpace" value={{tags}}></textarea>></li>-->
+			<li><button class="saveContent">save</button><button class="cancelContent">Cancel</button></li>
+		</ul>
+</template>
+
+<template name= "contentEssentials">
+		<li  class="applaudText">{{applauds}} Applauds</li>
+		<input type="button" class="applaudContent" value="Applaud">
+		{{#if ownContent}}
+		<input type="button" class="removeContent" value="Delete">
+		<input type="button" class="editContent" value="Edit">		
+		{{/if}}
+		<input type="button" class="favouriteContent" value="Favourite">  <span class="favouriteText">{{favourites}}  Favourites</span>
+		<li><!--{{>shareit shareData}}--> <a class="comnt">{{commentsCount}}comments</a> </li>
+</template>
+
+<template name="addPoems">
+	<form>
+	<ul style="list-style-type:none">
+		<li><textarea class="form-control" name="theme" placeholder="Title"></textarea></li>
+		<li><textarea name="poem" placeholder="Poem" id="basketSpace"></textarea></li>
+		<!--<li><textarea name= "tagsForPoems" class= "form-control tags" placeholder= "Tags(Optional) separated by spaces"></textarea></li>-->
+		<li><input type="checkbox" id="anonymousPosting" name="Post as anonymous">Post as anonymous</li>
+		<li><input type="submit" value="Add poem"></li>
+	</ul>
+	</form>
+</template>
+
+<template name="addToems">
+	<form>
+	<ul style="list-style-type:none">
+		<li><textarea class="form-control modify" name="theme" placeholder="Title"></textarea></li>
+		<li><textarea name="toem" placeholder="Short story" id="basketSpace"></textarea></li>
+		<!--<li><textarea name= "tagsForToems" class= "form-control tags" placeholder= "Tags(Optional) separated by spaces"></textarea></li>-->
+		<li><input type="checkbox" id="anonymousPosting" name="Post as anonymous">Post as anonymous</li>
+		<li><input type="submit" value="Add Short Story"></li>
+	</ul>
+	</form>
+</template>
+
+<template name="commentsTemp">
+		<ul style="list-style-type:none">
+			{{#if currentUser}}
+			<a class="profPageAuthor" href= '/profilePage'><img id="cmntPic" src="{{commentPic}}"></a>{{>commentSubmit}}
+			{{/if}}
+		</ul>
+
+		{{#each Comment}}
+		<ul style="list-style-type:none" class="comments">
+			<p><a href="/user/{{createdBy}}"><img id="commentAuthor" src="{{commentAuthorPic}}"></a><li class="commentMain">{{{body}}}</li>
+			<li class="commentCreatedAt">commented by {{author}} on {{createdAt}}</li>
+			{{#if ownComment}}
+			<li><input type="button" class="removeComment" value="Delete"></li>
+			{{/if}}
+			</p>
+		</ul>
+		{{/each}}
+</template>
+
+<template name="commentSubmit">
+	<form>
+	<div class="cmntContainerAndbtncmnt">
+		<ul style="list-style-type:none">
+			<li><textarea name="commentBody" id="cmntContainer" placeholder="Comment"></textarea></li>
+			<li><input type="submit" class="btncmnt" value="Comment"></li>
+		</ul>
+	</div>
+	</form>
+</template>
+
+<template name="forumPoem">
+<div class="forumcl">
+<img class="forumSubmitPhoto" src="{{currentUserPhoto}}">{{>addPoemThread}}
+	<div>
+		{{#each ForumPoemDiscussion}}
+		<ul style="list-style-type:none" class="eachForum">
+				<li><img class="threadPhoto" src="{{authorPhoto}}"> <span class="threadAuthor">{{author}}</span></li>
+				<li><a class="contentParentThread" href="/PoemThread/{{_id}}">{{{poemForumThread}}}</a></li>
+				<li><span class="numberOfComments"> {{numberOfComments}} comments</span></li>
+				<li class="contentThreadText">created at {{createdAt}}</li>
+				{{#if ownThread}}
+				<li><input type="button" class="removeForumPoemThread" value="Delete"></li>
+				{{/if}}
+		</ul>
+		{{/each}}
+	</div>
+		{{#if nextPath}}
+	    <a href="{{nextPath}}" class="btn btn-default load-moreForum">Load more</a>
+	      {{#unless ready}}
+	        {{> spinner}}
+	      {{/unless}}
+    {{/if}}
+</div>
+</template>
+
+<template name="addPoemThread">
+	<form class="threadContainer">
+	<div>
+		<ul style="list-style-type:none">
+			<li><textarea name="poemForumThreadArea" id="poemForumThreadContainer" placeholder="Enter a new thread"></textarea></li>
+			<li><input type="submit" class="btnThread" value="Add a new thread"></li>
+		</ul>
+	</div>
+	</form>
+</template>
+
+<template name="individualPoemThread">
+<div class="forumcl">
+	<ul style="list-style-type:none">
+		<li><img class="individualThreadPhoto" src="{{authorPhoto}}"> <span class="individualThreadAuthor">{{author}}</span></li>
+		<li class="individualContentParentThread">{{{poemForumThread}}}</li>
+		<li><span class="individualNumberOfComments"> {{numberOfComments}} comments</span></li>
+		<li class="individualContentThreadText">created at {{threadCreatedAt}}</li>
+	</ul>
+	<div>
+		{{#each ForumPoemQuote}}
+		<ul style="list-style-type:none">
+			<li><img class="quotePhoto" src="{{authorPhoto}}"><span class="quoteAuthor">{{author}}</span></li>
+			<li><span class="contentQuote">{{{poemForumQuote}}}</span></li>
+			<li class="contentQuoteText">Written at {{createdAt}}</li>
+			{{#if ownQuote}}
+			<li><!--<input type="button" class="editForumPoemQuote" value="Edit">-->
+				<input type="button" class="removeForumPoemQuote" value="Delete"></li>			
+			{{/if}}
+			<!--{{#if editing}}
+			{{>individualPoemQuoteEdit}}
+			{{/if}}-->
+		</ul>
+		{{/each}}
+	</div>
+	<img class="quoteSubmitPhoto" src="{{currentUserPhoto}}">{{>addPoemQuote}}
+</div>
+</template>
+
+<!--<template name="individualPoemQuoteEdit">
+	<ul style="list-style-type:none">
+		<li><textarea name="poemForumQuote" id="poemForumQuoteEdit" value={{poemForumQuote}}></textarea></li>
+		<li><button class="saveForumQuote">save</button><button class="cancelForumQuote">Cancel</button></li>
+	</ul>
+</template>-->
+
+<template name="addPoemQuote">
+	<form class="threadContainer">
+	<div>
+		<ul style="list-style-type:none">
+			<li><textarea name="poemForumQuote" id="poemForumQuoteContainer" placeholder="Enter a new comment"></textarea></li>
+			<li><input type="submit" class="btnForQuote" value="Add a new comment"></li>
+		</ul>
+	</div>
+	</form>
+</template>
+
+<template name="forumToem">
+<div class="forumcl">
+<img class="forumSubmitPhoto" src="{{currentUserPhoto}}">{{>addToemThread}}
+	<div>
+		{{#each ForumToemDiscussion}}
+		<ul style="list-style-type:none" class="eachForum">
+				<li><img class="threadPhoto" src="{{authorPhoto}}"> <span class="threadAuthor">{{author}}</span></li>
+				<li><a class="contentParentThread" href="/ToemThread/{{_id}}">{{{toemForumThread}}}</a></li>
+				<li><span class="numberOfComments"> {{numberOfComments}} comments</span></li>
+				<li class="contentThreadText">created at {{createdAt}}</li>
+				{{#if ownThread}}
+				<li><input type="button" class="removeForumToemThread" value="Delete"></li>
+				{{/if}}
+			</ul>
+		{{/each}}
+	</div>
+		{{#if nextPath}}
+	    <a href="{{nextPath}}" class="btn btn-default load-moreForum">Load more</a>
+	      {{#unless ready}}
+	        {{> spinner}}
+	      {{/unless}}
+    {{/if}}
+</div>
+</template>
+
+<template name="addToemThread">
+	<form class="threadContainer">
+	<div>
+		<ul style="list-style-type:none">
+			<li><textarea name="toemForumThreadArea" id="toemForumThreadContainer" placeholder="Enter a new thread"></textarea></li>
+			<li><input type="submit" class="btnThread" value="Add a new thread"></li>
+		</ul>
+	</div>
+	</form>
+</template>
+
+<template name="individualToemThread">
+<div class="forumcl">
+	<ul style="list-style-type:none">
+		<li><img class="individualThreadPhoto" src="{{authorPhoto}}"> <span class="individualThreadAuthor">{{author}}</span></li>
+		<li class="individualContentParentThread">{{{toemForumThread}}}</li>
+		<li><span class="individualNumberOfComments"> {{numberOfComments}} comments</span></li>
+		<li class="individualContentThreadText">created at {{threadCreatedAt}}</li>
+	</ul>
+	<div>
+		{{#each ForumToemQuote}}
+		<ul style="list-style-type:none">
+
+				<li><img class="quotePhoto" src="{{authorPhoto}}"><span class="quoteAuthor">{{author}}</span></li>
+				<li><span class="contentQuote">{{{toemForumQuote}}}</span></li>
+				<li class="contentQuoteText">Written at {{createdAt}}</li>
+				{{#if ownQuote}}
+				<li><!--<input type="button" class="editForumToemQuote" value="Edit">-->
+					<input type="button" class="removeForumToemQuote" value="Delete"></li>			
+				{{/if}}
+				<!--{{#if editing}}
+				{{>individualToemQuoteEdit}}
+				{{/if}}-->
+	</ul>
+			{{/each}}
+	</div>
+	<img class="quoteSubmitPhoto" src="{{currentUserPhoto}}">{{>addToemQuote}}
+</div>
+</template>
+
+<!--<template name="individualToemQuoteEdit">
+	<ul style="list-style-type:none">
+		<li><textarea name="toemForumQuote" id="toemForumQuoteEdit" value={{toemForumQuote}}></textarea></li>
+		<li><button class="saveForumQuote">save</button><button class="cancelForumQuote">Cancel</button></li>
+	</ul>
+</template>-->
+
+<template name="addToemQuote">
+	<form class="threadContainer">
+	<div>
+		<ul style="list-style-type:none">
+			<li><textarea name="toemForumQuote" id="toemForumQuoteContainer" placeholder="Enter a new comment"></textarea></li>
+			<li><input type="submit" class="btnForQuote" value="Add a new comment"></li>
+		</ul>
+	</div>
+	</form>
+</template>
+
+
+
+<template name="profilePage">
+	<div>
+		<ul style="list-style-type:none" class="pclProf">
+			<li><img id="profilePagePic" src="{{profilePagePicture}}"><span class="username">{{profileUsername}}</span></li>
+			<li class="accesories">{{countOfPoems}} Poems</li>
+			<li class="accesories">{{countOfToems}} Short stories</li>
+			<li class="accesories">{{countOfFollowers}} Followers</li>
+			<li class="accesories">{{countOfFollowings}} Followings</li>			
+		</ul>
+	</div>
+	<div>
+	<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+		<p class="bucket">	
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>	
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+		{{>commentsTemp}}
+		</p>
+	{{/each}}
+	</ul>
+	{{#if nextPath}}
+	    <a href="{{nextPath}}" class="btn btn-default load-more">Load more</a>
+	      {{#unless ready}}
+	        {{> spinner}}
+	      {{/unless}}
+    {{/if}}
+	</div>
+</template>
+
+<template name="profPageAuthorSubmit">
+	<div>
+		<ul style="list-style-type:none" class="pclProf">
+			<li><img id="profilePagePic" src="{{profilePagePicture}}"><span class="username">{{authorSubmit}}</span></li>
+			{{#if notSameUser}}
+			<li class="accesories"><input type="button" id="followUnfollow" value={{followText}}></li>
+			{{/if}}
+			<li class="accesories">{{countOfPoems}} Poems</li>
+			<li class="accesories">{{countOfToems}} Short stories</li>
+			<li class="accesories">{{countOfFollowers}} Followers</li>
+			<li class="accesories">{{countOfFollowings}} Followings</li>
+		</ul>
+	</div>
+	<div>
+	<ul style="list-style-type:none" class="pcl">
+	{{#each Contents}}
+		<p class="bucket">	
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>	
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		<!--<li class= "tagsBody">{{#each tags}}<a href="/tagsTemp/{{this}}">{{{this}}}</a> {{/each}}</li>-->
+		{{>contentEssentials}}
+		{{#if editing}}
+		{{>contentEdit}}
+		{{/if}}
+		{{>commentsTemp}}
+		</p>
+	{{/each}}
+	</ul>
+	</div>
+</template>
+
+<!--<template name ="tagsItem">
+<ul style="list-style-type:none" class="pcl">
+<div class="tagsId">
+<span class="tagsItemIdentification">Tag: #{{tagsItemIdentification}}</span>
+</div>
+	{{#each Contents}}
+<li class="poem">
+	<p class="bucket">
+		<li class= "contentType">{{type}}</li>
+		<li class= "titleBody"><strong>{{{title}}}</strong></li>
+		<li><a href="/user/{{createdBy}}"><img class="authorPic" src="{{authorPhoto}}"><span class="authorName">{{author}}</span></a></li>
+		<li><span class="createdAtTime">Written at {{createdAt}}</span></li>
+		<li class= "{{selectedClass}}">{{{content}}}</li>
+		{{#if BigClass}}<li><a href="#" class= "expandOrCollapse">(...)</a></li>{{/if}}
+		{{>contentEssentials}}	
+	{{#if editing}}
+		{{>contentEdit}}
+	{{/if}}
+		{{>commentsTemp}}
+	</p>
+		</li>
+	{{/each}}
+</ul>
+</template>-->
