@@ -1,0 +1,801 @@
+body { 
+	padding-top: 70px; 
+}
+
+#iron-router-progress {
+    background-color : #FF0000;
+    box-shadow       : 0 0 5px #FF0000;
+}
+
+.bground{
+ 	background: linear-gradient(to right, #D0D0D0, #F0F0F0);/*#f6f1d3*/
+}
+
+.navbar-header{
+}
+
+.affix{
+}
+
+.navbar-center{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    margin: auto;
+  	height:100%;
+}
+
+.fontModify{
+	color: white;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	font-size: 18px;
+}
+
+.logo{
+	color: white;
+	font-family: Georgia, Palatino Linotype, Verdana;
+	font-size: 18px;
+}
+
+a:visited{
+	text-decoration: none;	
+}
+
+.fbPic{
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	z-index: 2000;
+}
+
+.login{
+	margin-top: 5px;
+}
+
+.fbPicNavbar{
+}
+
+.login-display-name{
+	color: white;
+	margin-top: 20px;
+}
+
+#profilePic {
+	height: 100px;
+	width: 100px;
+	border-radius: 15px;
+	border: 2px solid white;
+	z-index: 2000;	
+}
+
+#profileName{
+	z-index: 2000;
+	font-size: 16px;
+}
+
+.fixed{
+	position: fixed;
+}
+
+.index{
+	z-index: 2000;
+	font-size: 14px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
+
+.navigationBucket{
+	margin-top: 20px;
+	border: 2px solid silver;
+	border-radius: 5px;
+}
+
+#apId, #asId, #pId, #sId, #mpId, #msId, #fpId, #fsId{
+	margin-top: 5px;
+}
+
+.mBorder{
+	border-bottom: 2px solid silver;
+}
+
+.top-buffer{
+	position: relative;
+	margin-top: 50px;
+}
+
+#feedback{
+	height: 310px;
+	margin-top: -20px;
+	background-color: white;
+	text-align: left;
+	overflow: scroll;
+	border-bottom: 2px solid silver;
+	border-left: 2px solid silver;
+	border-right: 2px solid silver;
+}
+
+#feedbackBox{
+	background: #CCCC99;
+	font-size: 14px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	border-top: 2px solid silver;
+	border-left: 2px solid silver;
+	border-right: 2px solid silver;
+}
+
+.lightFeedbackContent{
+	font-size: 12px;
+	margin-left: -30px;
+}
+
+.lightFeedback{
+	font-weight: lighter;
+	font-size: 10px;
+	margin-left: -30px;
+}
+
+.feedbackContainer{
+	top: 10px;
+	-webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+	margin-left: -30px;
+}
+
+.feedbackButton{
+	margin-left: -30px;
+}
+
+input[type=submit] {
+	background-color: green;
+	height: 30px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: white;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+input[type=submit]:hover {
+  background: green;
+  color: #fff;
+}
+
+input[type=button]{
+	height: 30px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: transparent;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+input[type=button]:hover{
+  background: green;
+  color: #fff;	
+}
+
+.applaudText{
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;
+	margin-top: -12px;
+}
+
+.applaudContent {
+	width: 80px;
+	margin-top: 5px;
+}
+
+.removeContent {
+	position: relative;
+	width: 80px;
+	margin-top: 5px;
+}
+
+.editContent{
+	width: 80px;
+	margin-top: 5px;
+}
+
+.favouriteContent{
+	width: 80px;
+	margin-top: 5px;
+}
+
+.removeComment{
+	position: relative;
+	left: -20px;
+	width: 80px;
+}
+
+.saveContent{
+	position: relative;
+	top: -25px;
+	width: 80px;
+}
+
+.cancelContent{
+	position: relative;
+	top: -25px;
+	width: 80px;
+}
+
+#followUnfollow{
+	position: relative;
+	width: 80px;	
+}
+
+.removeForumPoemThread{
+	position: relative;
+	left: 60px;
+	top: -45px;
+	width: 80px;	
+}
+
+.removeForumToemThread{
+	position: relative;
+	top: -45px;
+	left: 60px;
+	width: 80px;
+}
+
+.editForumPoemQuote{
+	position: relative;
+	left: 60px;
+	width: 80px;
+}
+
+.removeForumPoemQuote{
+	position: relative;
+	left: 60px;
+	width: 80px;
+}
+
+.editForumToemQuote{
+	position: relative;
+	left: 60px;
+	width: 80px;
+}
+
+.removeForumToemQuote{
+	position: relative;
+	left: 60px;
+	width: 80px;
+}
+
+a.large.btn.shareit-facebook-colors.fb-share{
+	position: relative;
+	top: 10px;
+	height: 25px;
+	font-size: 12px;
+}
+
+#disabled{
+	color: black;
+}
+
+.threadContainer{
+	position: relative;
+	margin-top: 50px;
+}
+ 
+.modify{
+	height: 25px;
+}
+
+#basketSpace{
+	position: relative;
+	top: 0px;
+	left: 0px;
+	border: 2px solid silver;
+}
+
+#anonymousPosting{
+
+}
+
+.poem{
+	position: relative;
+	margin-left: -12px;
+	margin-right: 12px;
+}
+
+.removePoem{
+	position: relative;
+}
+
+.pcl{
+	background-color: white;
+	border: 2px solid silver;
+}
+
+.toem{
+	position: relative;
+	margin-left: -12px;
+	margin-right: 12px;
+}
+
+.removeToem{
+	position: relative;
+}
+
+.authorPic{
+	position: relative;
+	margin-top: 30px;
+	height:60px;
+	width: 60px;
+	border-radius: 50%;
+}
+
+.authorName{
+	position: relative;
+	font-family: Verdana;
+	font-size: 18px;
+	left: 10px;
+}
+
+.createdAtTime{
+	position: relative;
+	top: -35px;
+	left: 70px;
+	font-weight: lighter;
+	font-family: Calibri;
+	font-size: 12px;
+	color: #787878;
+}
+
+.titleBody{
+	position: relative;
+	color: green;
+	top: 25px;
+	margin-right: 20px;
+	font-size: 20px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
+
+.secondContent{
+	display: inline;
+	position: relative;
+	top: -15px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
+
+.contentType{
+	position: relative;
+	text-align: right;
+	font-size: 16px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	top: 20px;
+	right: 0px;
+}
+
+.titleEditSpace{
+	position: relative;
+	top: 10px;
+	left: -40px;
+}
+
+.tagEditSpace{
+	position: relative;
+	top: -15px;
+	left: -40px;
+}
+
+.contentEditSpace{
+	position: relative;
+	top: 20px;
+}
+
+.saveContent{
+	position: relative;
+	left:-40px;
+	top:-20px;
+	background-color: green;
+	height: 25px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: white;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.cancelContent{
+	position: relative;
+	left:-40px;
+	top:-20px;
+	background-color: green;
+	height: 25px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: white;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.saveForumQuote{
+	position: relative;
+	left: 20px;
+	height: 25px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: white;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.cancelForumQuote{
+	position: relative;
+	left: 20px;
+	height: 25px;
+ 	transition: all 200ms ease-in;
+ 	font-family: 'Source Sans Pro' ,'Helvetica Neue', Helvetica, Arial, sans-serif;
+  	border-radius: 3em;
+	border: 1px solid;
+	background: white;
+	color: green;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+
+.saveContent, .saveForumQuote, .cancelContent, .cancelForumQuote:hover{
+  background: green;
+  color: #fff;	
+}
+
+.favouriteText{
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;	
+}
+
+.comnt{
+	position: relative;
+	top: 5px;
+	margin-right: 20px;
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;
+}
+
+.empty{
+	clear: top;
+	background-color: white;
+	height: 320px;
+	border-bottom: 2px solid silver;
+}
+
+.emptyDisplay{
+	position: relative;
+	top: 140px;
+	font-size: 24px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	text-align: center;
+}
+
+.beforeLogin{
+	background-color: white;
+}
+
+#cmntContainer{
+	position: relative;
+	height: 30px;
+	left:-25px;
+	top:-20px;
+}
+
+.btncmnt{
+	position: relative;
+	margin-left: -25px;
+	top: -20px;
+	width: 80px;
+}
+
+.comments{
+	position: relative;
+	margin-left: 50px;
+	margin-top: -10px;
+	margin-right: 10px;	
+	border-top: 1px solid silver;
+}
+
+#cmntPic{
+	position: relative;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
+	margin-left: -40px;
+	top: 15px;
+}
+
+#commentAuthor{
+	position: relative;
+	margin-left: -90px;
+	height: 40px;
+	width: 40px;
+	border-radius: 50%
+}
+
+.commentCreatedAt{
+	position: relative;
+	left: -20px;
+	font-weight: lighter;
+	font-family: Calibri;
+	font-size: 12px;
+	color: #787878;
+	margin-top: -40px;
+}
+
+.commentMain{
+	position: relative;
+	top: -40px;
+	left: -20px;
+}
+
+.pclProf{
+	position: relative;
+	margin-left: 4px;
+}
+
+.username{
+	position: relative;
+	left: 10px;
+}
+
+#profilePagePic{
+	height: 80px;
+	width: 80px;
+	border: 2px solid white;
+	border-radius: 50%;
+}
+
+.btnThread{
+	position: relative;
+	margin-left: 60px;
+	top: -40px;
+}
+
+.forumcl{
+	background-color: white;
+}
+
+#poemForumThreadContainer{
+	position: relative;
+	left: 60px;
+	top: -40px;
+	width: 70%;
+}
+
+#poemForumQuoteContainer{
+	position: relative;
+	left: 60px;
+	top: -80px;
+	width: 70%;
+}
+
+#toemForumThreadContainer{
+	position: relative;
+	left: 60px;
+	top: -40px;
+	width: 70%;
+}
+
+#toemForumQuoteContainer{
+	position: relative;
+	left: 60px;
+	top: -80px;
+	width: 70%;
+}
+
+.contentThreadText{
+	position: relative;
+	top: -50px;
+	left: 60px;
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;
+}
+
+.individualContentThreadText{
+	position: relative;
+	left: 60px;
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;
+}
+
+.threadPhoto{
+	position:relative;
+	top: -20px;
+	border-radius: 50%;
+}
+
+.threadAuthor{
+	position: relative;
+	font-size: 16px;
+	left: 7px;
+	top: -35px;
+}
+
+.individualThreadPhoto{
+	position:relative;
+	top: 25px;
+	border-radius: 50%;
+}
+
+.individualThreadAuthor{
+	position: relative;
+	top: 15px;
+	font-size: 16px;
+	left: 7px;
+}
+
+.contentParentThread{
+	position: relative;
+	top: -50px;
+	left: 60px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	color: green;
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.individualContentParentThread{
+	position: relative;
+	left: 60px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	color: green;
+	font-size: 18px;
+	font-weight: bolder;
+}
+
+.contentQuote{
+	position: relative;
+	left: 60px;
+}
+
+.contentQuoteText{
+	position: relative;
+	left: 60px;
+	font-weight: lighter;
+	font-size: 12px;
+	color: #787878;	
+}
+
+.quotePhoto{
+	position:relative;
+	top:20px;
+	border-radius: 50%;
+}
+
+.quoteAuthor{
+	position: relative;
+	top: 15px;
+	left: 10px;
+}
+
+.forumSubmitPhoto{
+	position: relative;
+	border-radius: 50%;
+	left: 40px;
+	top: 60px;
+}
+
+.quoteSubmitPhoto{
+	position: relative;
+	border-radius: 50%;
+	top: 20px;
+	left: 40px;
+}
+
+#poemForumQuoteEdit{
+	position: relative;
+	left: 20px;
+}
+
+#toemForumQuoteEdit{
+	position: relative;
+	left: 20px;
+}
+
+.btnForQuote{
+	position: relative;
+	margin-left: 60px;
+	top: -80px;
+}
+
+.numberOfComments{
+	position: relative;
+	top: -50px;
+	left: 60px;
+}
+
+.individualNumberOfComments{
+	position: relative;
+	left: 60px;
+}
+
+.load-more{
+	margin-top: -10px;
+	width: 100%;
+}
+
+.load-moreForum{
+	margin-top: -10px;
+	width: 100%;
+}
+
+.tags{
+}
+
+.tagsBody{
+	position: relative;
+	top: -15px;
+	font-size: 12px;
+	color: #787878;
+}
+
+.expandOrCollapse{
+	position: relative;
+	top: -15px;
+	font-size: 12px;
+	color: #787878;
+}
+
+.tagsId{
+	height: 80px;
+}
+
+.tagsItemIdentification{
+	position: relative;
+	top: 25px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+	font-size: 20px;
+	color: green;
+}
+
+.bucket{
+	margin-top: -2px;
+	width: 94%;
+	border-top: 2px solid silver;
+	height: auto;
+	overflow: hidden;
+}
+
+.contentMain{
+	position: relative;
+	overflow: hidden;
+	height: 60px;
+	top: -15px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
+
+.Big{
+	position: relative;
+	height: auto;
+	top: -15px;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
+
+.expandOrCollapse,.expandOrCollapse:visited{
+	font-size: 18px;
+	color: green;
+	font-family: Palatino Linotype, Georgia, Verdana, sans-serif;
+}
